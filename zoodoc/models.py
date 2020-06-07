@@ -33,6 +33,7 @@ class Qualification(models.Model):
 
 
 class Office_Location(models.Model):
+    office_name = models.CharField(max_length=250)
     street_address = models.CharField(max_length=100)
     city = models.CharField(max_length=50)
     state = models.CharField(max_length=50)
@@ -43,7 +44,7 @@ class Office_Location(models.Model):
         Doctor, on_delete=models.CASCADE, related_name='office_location')
 
     def __str__(self):
-        return self.city
+        return self.office_name
 
 
 class In_Network_Insurance(models.Model):
@@ -92,12 +93,10 @@ class Appointment(models.Model):
     date = models.DateField()
     time = models.TimeField()
     reason_for_visiting = models.TextField(blank=True, null=True)
-    patient = models.ForeignKey(
-        Profile, on_delete=models.CASCADE, related_name='appointment')
     office = models.ForeignKey(
         Office_Location, on_delete=models.CASCADE, related_name='appointment')
     owner = models.ForeignKey(
         'auth.User', on_delete=models.CASCADE, related_name="appointment")
 
     def __str__(self):
-        return self.patient.owner_first_name
+        return self.owner.username
