@@ -9,11 +9,17 @@ verify_ssl = true
 django = "*"
 psycopg2-binary = "*"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 djangorestframework = "*"
 djangorestframework-jwt = "*"
 django-cors-headers = "*"
 >>>>>>> 1e5bb15153522aec51664c9fff011da3ebea3805
+=======
+djangorestframework = "*"
+djangorestframework-jwt = "*"
+django-cors-headers = "*"
+>>>>>>> 4bbd0be2d2db4b4d1ca72ad44ddea8aecd540258
 
 [requires]
 python_version = "3.8"

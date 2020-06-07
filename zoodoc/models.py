@@ -1,8 +1,11 @@
 from django.db import models
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Create your models here.
 =======
+=======
+>>>>>>> 4bbd0be2d2db4b4d1ca72ad44ddea8aecd540258
 from django.contrib.postgres.fields import ArrayField
 from django.contrib.auth.models import User
 # Create your models here.
@@ -103,4 +106,7 @@ class Appointment(models.Model):
 
     def __str__(self):
         return self.owner.username
+<<<<<<< HEAD
 >>>>>>> 1e5bb15153522aec51664c9fff011da3ebea3805
+=======
+>>>>>>> 4bbd0be2d2db4b4d1ca72ad44ddea8aecd540258
