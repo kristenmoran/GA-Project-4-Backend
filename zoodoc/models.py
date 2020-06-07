@@ -1,5 +1,6 @@
 from django.db import models
 
+from django.contrib.postgres.fields import ArrayField
 # Create your models here.
 
 
@@ -7,10 +8,12 @@ class Doctor(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     gender = models.CharField(max_length=25)
-    specialization = models.CharField(max_length=100)
-    languages = models.CharField(max_length=100)
+    specialization = ArrayField(models.CharField(
+        max_length=100), null=True, blank=True)
+    languages = ArrayField(models.CharField(
+        max_length=50), null=True, blank=True)
     about = models.TextField()
-    practicing_from = models.DateField()
+    practicing_from = models.CharField(max_length=50)
     image_url = models.TextField()
 
     def __str__(self):
@@ -43,12 +46,13 @@ class Office_Location(models.Model):
 
 
 class In_Network_Insurance(models.Model):
-    insurance_name = models.CharField(max_length=100)
+    insurance_name = ArrayField(models.CharField(
+        max_length=100))
     office = models.ForeignKey(
         Office_Location, on_delete=models.CASCADE, related_name='insurance_name')
 
     def __str__(self):
-        return self.insurance_name
+        return ','.join(self.insurance_name)
 
 
 class Review(models.Model):
@@ -60,7 +64,7 @@ class Review(models.Model):
     doctor = models.ForeignKey(
         Doctor, on_delete=models.CASCADE, related_name='reviews')
 
-    def __str__(self):
+    def __int__(self):
         return self.overall_rating
 
 
@@ -82,6 +86,7 @@ class Profile(models.Model):
 class Appointment(models.Model):
     date = models.DateField()
     time = models.TimeField()
+    reason_for_visiting = models.TextField(blank=True, null=True)
     patient = models.ForeignKey(
         Profile, on_delete=models.CASCADE, related_name='appointment')
     office = models.ForeignKey(
